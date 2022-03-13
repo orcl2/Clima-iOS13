@@ -9,24 +9,24 @@
 import Foundation
 import CoreImage
 
-struct WeatherData: Decodable {
+struct WeatherData: Codable {
     let name: String
     let coord: Coord
     let main: Main
     let weather: [Weather]
 }
 
-struct Coord: Decodable {
+struct Coord: Codable {
     let lon: Float
     let lat: Float
 }
 
-struct Main: Decodable {
-    let temp: Float
-    let pressure: Float
-    let humidity: Float
-    let tempMin: Float
-    let tempMax: Float
+struct Main: Codable {
+    let temp: Double
+    let pressure: Double
+    let humidity: Double
+    let tempMin: Double
+    let tempMax: Double
     
     enum CodingKeys: String, CodingKey {
         case tempMin = "temp_min"
@@ -37,7 +37,7 @@ struct Main: Decodable {
     }
 }
 
-struct Weather: Decodable {
+struct Weather: Codable {
     let id: Int
     let description: String
 }

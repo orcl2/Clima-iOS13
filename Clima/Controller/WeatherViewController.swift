@@ -16,11 +16,17 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var searchTextField: UITextField!
     
     var weatherManager = WeatherManager()
-    var iconManager = IconManager()
+    var weatherViewModel: WeatherModel?
+    {
+        didSet {
+            updateUI(model: weatherViewModel!)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        weatherManager.delegate = self
         searchTextField.delegate = self
     }
 
@@ -58,6 +64,11 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         searchTextField.text = ""
     }
     
+    func updateUI(model: WeatherModel) {
+        temperatureLabel.text = model.temperatureString
+        cityLabel.text = model.cityName
+        conditionImageView.image = UIImage(named: model.conditionName)
+    }
 }
 
 extension UIImageView {
@@ -82,5 +93,15 @@ extension UIImageView {
     func downloaded(from link: String, contentMode mode: ContentMode = .scaleAspectFit) {
         guard let url = URL(string: link) else { return }
         downloaded(from: url, contentMode: mode)
+    }
+}
+
+extension WeatherViewController : WeatherManagerDelegate {
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
+        weatherViewModel = weather
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
     }
 }
