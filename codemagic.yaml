@@ -1,0 +1,12 @@
+workflows:
+  clima-workflow:
+    name: Clima Pipeline
+    scripts:
+      - name: CICD Started
+        script: echo "Starting Clima Pipeline"
+      - name: Build Clima
+        script: xcodebuild build -project "Clima.xcodeproj" -scheme "Clima" CODE_SIGN_INDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+    publishing:
+      email:
+        recipients:
+        - wdarchenemy@gmail.com
