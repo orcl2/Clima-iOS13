@@ -4,6 +4,8 @@ workflows:
     scripts:
       - name: CICD Started
         script: echo "Starting Clima Pipeline"
+      - name: Build Clima
+        script: xcodebuild build -workspace "Clima.xcworkspace" -scheme "Clima" CODE_SIGN_INDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
     publishing:
       email:
         recipients:
