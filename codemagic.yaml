@@ -1,5 +1,10 @@
 workflows:
-  my-workflow:
+  clima-workflow:
+    name: Clima Pipeline
     scripts:
-      - name: say hello
-        script: echo "Hello Codemagician!"
+      - name: CICD Started
+        script: echo "Starting Clima Pipeline"
+    publishing:
+      email:
+        recipients:
+        - wdarchenemy@gmail.com
